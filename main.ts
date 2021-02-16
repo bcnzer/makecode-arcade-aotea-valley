@@ -3,13 +3,16 @@ namespace SpriteKind {
     export const Boy = SpriteKind.create()
     export const Dog = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Building, function (sprite, otherSprite) {
+    tiles.setTilemap(tilemap`levelAmelieHouse`)
+})
 function gameIntro () {
     game.splash("Welcome to", "AMELIE VALLEY")
     characterName = game.askForString("What is your name?")
 }
 function worldSetup () {
     myCharactersHouse = sprites.create(assets.image`mySplashscreen`, SpriteKind.Building)
-    myCharactersHouse.setPosition(80, 35)
+    myCharactersHouse.setPosition(80, 25)
     myCharactersField = sprites.create(assets.image`field`, SpriteKind.Player)
     myCharactersField.setPosition(133, 40)
     myMainCharacter = sprites.create(img`
