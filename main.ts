@@ -3,8 +3,11 @@ namespace SpriteKind {
     export const Boy = SpriteKind.create()
     export const Dog = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tree4`, function (sprite, location) {
+    sprite.say("A stumpy stump", 500)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Building, function (sprite, otherSprite) {
-    tiles.setTilemap(tilemap`levelAmelieHouse`)
+    sprite.say("This is my house", 200)
 })
 function gameIntro () {
     game.splash("Welcome to", "AMELIE VALLEY")
