@@ -6,13 +6,270 @@ namespace SpriteKind {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tree4`, function (sprite, location) {
     sprite.say("A stumpy stump", 500)
 })
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    myMainCharacter,
+    [img`
+        . . . . . . . 5 5 . . . . . . . 
+        . . . . . f 5 5 5 5 f . . . . . 
+        . . . . f 6 6 6 6 6 6 f . . . . 
+        . . . f 6 1 1 1 6 1 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . f f 6 6 6 6 6 6 6 6 f f . . 
+        . f 6 6 6 f 6 6 6 6 f 6 6 6 f . 
+        . . f f f 3 f f f f 3 f f f . . 
+        . . . f d 5 3 3 3 3 5 d f . . . 
+        . . f d d f 3 3 3 3 f d d f . . 
+        . . . f f f 5 3 3 5 f f f . . . 
+        . . . . f 3 3 5 5 3 3 f . . . . 
+        . . . . f 3 3 3 3 3 3 f . . . . 
+        . . . . . f f f f f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 5 5 . . . . . . . 
+        . . . . . f 5 5 5 5 f . . . . . 
+        . . . . f 6 6 6 6 6 6 f . . . . 
+        . . . f 6 1 1 1 6 1 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . f f 6 6 6 6 6 6 6 6 f f . . 
+        . f 6 6 6 f 6 6 6 6 f 6 6 6 f . 
+        . . f f f 3 f f f f 5 f f f . . 
+        . . . f d f 3 3 3 3 d d f . . . 
+        . . . . f 3 5 3 3 f d d f . . . 
+        . . . . f 3 3 5 5 3 f f . . . . 
+        . . . . f f 3 3 f f . . . . . . 
+        . . . . . . f f . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 5 5 . . . . . . . 
+        . . . . . f 5 5 5 5 f . . . . . 
+        . . . . f 6 6 6 6 6 6 f . . . . 
+        . . . f 6 1 1 1 6 1 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . . f 6 6 6 6 6 6 6 6 f . . . 
+        . . f f 6 6 6 6 6 6 6 6 f f . . 
+        . f 6 6 6 f 6 6 6 6 f 6 6 6 f . 
+        . . f f f 5 f f f f 3 f f f . . 
+        . . . f d d 3 3 3 3 f d f . . . 
+        . . . f d d f 3 3 5 3 f . . . . 
+        . . . . f f 3 5 5 3 3 f . . . . 
+        . . . . . . f f 3 3 f f . . . . 
+        . . . . . . . . f f . . . . . . 
+        `],
+    250,
+    true
+    )
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Building, function (sprite, otherSprite) {
     sprite.say("This is my house", 200)
+})
+controller.anyButton.onEvent(ControllerButtonEvent.Released, function () {
+    animation.stopAnimation(animation.AnimationTypes.All, myMainCharacter)
+    myMainCharacter.setImage(img`
+        . . . . . . 5 . 5 . . . . . . . 
+        . . . . . f 5 5 5 f f . . . . . 
+        . . . . f 1 5 2 5 1 6 f . . . . 
+        . . . f 1 6 6 6 6 6 1 6 f . . . 
+        . . . f 6 6 f f f f 6 1 f . . . 
+        . . . f 6 f f d d f f 6 f . . . 
+        . . f 6 f d f d d f d f 6 f . . 
+        . . f 6 f d 3 d d 3 d f 6 f . . 
+        . . f 6 6 f d d d d f 6 6 f . . 
+        . f 6 6 f 3 f f f f 3 f 6 6 f . 
+        . . f f d 3 5 3 3 5 3 d f f . . 
+        . . f d d f 3 5 5 3 f d d f . . 
+        . . . f f 3 3 3 3 3 3 f f . . . 
+        . . . f 3 3 5 3 3 5 3 3 f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . . . f f . . f f . . . . . 
+        `)
 })
 function gameIntro () {
     game.splash("Welcome to", "AMELIE VALLEY")
     characterName = game.askForString("What is your name?")
 }
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    myMainCharacter,
+    [img`
+        . . . . . . 5 . 5 . . . . . . . 
+        . . . . . f 5 5 5 f . . . . . . 
+        . . . . f 6 2 5 5 6 f . . . . . 
+        . . . f 6 6 6 6 1 6 6 f . . . . 
+        . . . f 6 6 6 6 6 1 6 f . . . . 
+        . . . f d f d 6 6 6 1 f . . . . 
+        . . . f d f d 6 6 6 6 f f . . . 
+        . . . f d 3 d d 6 6 6 f 6 f . . 
+        . . . . f d d d f f 6 f f . . . 
+        . . . . . f f 5 3 f 6 6 6 f . . 
+        . . . . f 5 3 3 f f f f f . . . 
+        . . . . f 3 3 f d f . . . . . . 
+        . . . . . f 3 f d f . . . . . . 
+        . . . . f 3 5 3 f d f . . . . . 
+        . . . . f f 3 3 f f . . . . . . 
+        . . . . . . f f f . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 5 . 5 . . . . . . 
+        . . . . . . f 5 5 5 f . . . . . 
+        . . . . . f 6 2 5 5 6 f . . . . 
+        . . . . f 6 6 6 6 1 6 6 f . . . 
+        . . . . f 6 6 6 6 6 1 6 f . . . 
+        . . . . f d f d 6 6 6 1 f . . . 
+        . . . . f d f d 6 6 6 6 f f . . 
+        . . . . f d 3 d d 6 6 6 f 6 f . 
+        . . . . . f d d d f f 6 f f . . 
+        . . . . . . f f 3 3 f f 6 6 f . 
+        . . . . . f d d d d f f f f . . 
+        . . . . . f d d d f 3 f . . . . 
+        . . . . . . f f f d 5 3 f . . . 
+        . . . . . f f f 3 3 f f . . . . 
+        . . . . . f f f f f f f . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 5 . 5 . . . . . . 
+        . . . . . . f 5 5 5 f . . . . . 
+        . . . . . f 6 2 5 5 6 f . . . . 
+        . . . . f 6 6 6 6 1 6 6 f . . . 
+        . . . . f 6 6 6 6 6 1 6 f . . . 
+        . . . . f d f d 6 6 6 1 f . . . 
+        . . . . f d f d 6 6 6 6 f f . . 
+        . . . . f d 3 d d 6 6 6 f 6 f . 
+        . . . . . f d d d f f 6 f f . . 
+        . . . . . . f f 3 3 f f 6 6 f . 
+        . . . . . f 5 3 3 d d f f f . . 
+        . . . . . f 3 3 3 f d d f . . . 
+        . . . . . . f 3 5 f f f . . . . 
+        . . . . . f 3 3 3 3 f . . . . . 
+        . . . . . . f f f f f . . . . . 
+        `],
+    250,
+    true
+    )
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    myMainCharacter,
+    [img`
+        . . . . . . . 5 . 5 . . . . . . 
+        . . . . . . f 5 5 5 f . . . . . 
+        . . . . . f 6 5 5 2 6 f . . . . 
+        . . . . f 6 6 1 6 6 6 6 f . . . 
+        . . . . f 6 1 6 6 6 6 6 f . . . 
+        . . . . f 1 6 6 6 d f d f . . . 
+        . . . f f 6 6 6 6 d f d f . . . 
+        . . f 6 f 6 6 6 d d 3 d f . . . 
+        . . . f f 6 f f d d d f . . . . 
+        . . f 6 6 6 f 3 5 f f . . . . . 
+        . . . f f f f f 3 3 5 f . . . . 
+        . . . . . . f d f 3 3 f . . . . 
+        . . . . . . f d f 3 f . . . . . 
+        . . . . . f d f 3 5 3 f . . . . 
+        . . . . . . f f 3 3 f f . . . . 
+        . . . . . . . f f f . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 5 . 5 . . . . . . . 
+        . . . . . f 5 5 5 f . . . . . . 
+        . . . . f 6 5 5 2 6 f . . . . . 
+        . . . f 6 6 1 6 6 6 6 f . . . . 
+        . . . f 6 1 6 6 6 6 6 f . . . . 
+        . . . f 1 6 6 6 d f d f . . . . 
+        . . f f 6 6 6 6 d f d f . . . . 
+        . f 6 f 6 6 6 d d 3 d f . . . . 
+        . . f f 6 f f d d d f . . . . . 
+        . f 6 6 f f 3 3 f f . . . . . . 
+        . . f f f f d d d d f . . . . . 
+        . . . . f 3 f d d d f . . . . . 
+        . . . f 3 5 d f f f . . . . . . 
+        . . . . f f 3 3 f f f . . . . . 
+        . . . . f f f f f f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 5 . 5 . . . . . . . 
+        . . . . . f 5 5 5 f . . . . . . 
+        . . . . f 6 5 5 2 6 f . . . . . 
+        . . . f 6 6 1 6 6 6 6 f . . . . 
+        . . . f 6 1 6 6 6 6 6 f . . . . 
+        . . . f 1 6 6 6 d f d f . . . . 
+        . . f f 6 6 6 6 d f d f . . . . 
+        . f 6 f 6 6 6 d d 3 d f . . . . 
+        . . f f 6 f f d d d f . . . . . 
+        . f 6 6 f f 3 3 f f . . . . . . 
+        . . f f f d d 3 3 5 f . . . . . 
+        . . . f d d f 3 3 3 f . . . . . 
+        . . . . f f f 5 3 f . . . . . . 
+        . . . . . f 3 3 3 3 f . . . . . 
+        . . . . . f f f f f . . . . . . 
+        `],
+    250,
+    true
+    )
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    myMainCharacter,
+    [img`
+        . . . . . . 5 . 5 . . . . . . . 
+        . . . . . f 5 5 5 f f . . . . . 
+        . . . . f 1 5 2 5 1 6 f . . . . 
+        . . . f 1 6 6 6 6 6 1 6 f . . . 
+        . . . f 6 6 f f f f 6 1 f . . . 
+        . . . f 6 f f d d f f 6 f . . . 
+        . . f 6 f d f d d f d f 6 f . . 
+        . . f 6 f d 3 d d 3 d f 6 f . . 
+        . . f 6 6 f d d d d f 6 6 f . . 
+        . f 6 6 f 3 f f f f 3 f 6 6 f . 
+        . . f f d 3 5 3 3 5 3 d f f . . 
+        . . f d d f 3 5 5 3 f d d f . . 
+        . . . f f 3 3 3 3 3 3 f f . . . 
+        . . . f 3 3 5 3 3 5 3 3 f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . . . f f . . f f . . . . . 
+        `,img`
+        . . . . . . 5 . 5 . . . . . . . 
+        . . . . . f 5 5 5 f f . . . . . 
+        . . . . f 1 5 2 5 1 6 f . . . . 
+        . . . f 1 6 6 6 6 6 1 6 f . . . 
+        . . . f 6 6 f f f f 6 1 f . . . 
+        . . . f 6 f f d d f f 6 f . . . 
+        . . f 6 f d f d d f d f 6 f . . 
+        . . f 6 f d 3 d d 3 d f 6 f . . 
+        . . f 6 6 f d d d d f 6 6 f . . 
+        . f 6 6 f 3 f f f f 3 f 6 6 f . 
+        . . f f 3 3 5 3 3 5 3 d f f . . 
+        . . . f d f 3 5 5 3 f f d f . . 
+        . . . f d f 3 3 3 3 3 f f . . . 
+        . . . f f 3 5 3 3 5 3 3 f . . . 
+        . . . . f f f f f f f f f . . . 
+        . . . . . . . . . f f . . . . . 
+        `,img`
+        . . . . . . 5 . 5 . . . . . . . 
+        . . . . . f 5 5 5 f f . . . . . 
+        . . . . f 1 5 2 5 1 6 f . . . . 
+        . . . f 1 6 6 6 6 6 1 6 f . . . 
+        . . . f 6 6 f f f f 6 1 f . . . 
+        . . . f 6 f f d d f f 6 f . . . 
+        . . f 6 f d f d d f d f 6 f . . 
+        . . f 6 f d 3 d d 3 d f 6 f . . 
+        . . f 6 6 f d d d d f 6 6 f . . 
+        . f 6 6 f 3 f f f f 3 f 6 6 f . 
+        . . f f d 3 5 3 3 5 3 3 f f . . 
+        . . f d f f 3 5 5 3 f d f . . . 
+        . . . f f 3 3 3 3 3 f d f . . . 
+        . . . f 3 3 5 3 3 5 3 f f . . . 
+        . . . f f f f f f f f f . . . . 
+        . . . . . f f . . . . . . . . . 
+        `],
+    200,
+    true
+    )
+})
 function worldSetup () {
     myCharactersHouse = sprites.create(assets.image`mySplashscreen`, SpriteKind.Building)
     myCharactersHouse.setPosition(80, 25)
@@ -128,10 +385,10 @@ sprites.onOverlap(SpriteKind.Boy, SpriteKind.Dog, function (sprite, otherSprite)
 let listQuests: string[] = []
 let characterLostDog: Sprite = null
 let characterBoy: Sprite = null
-let myMainCharacter: Sprite = null
 let myCharactersField: Sprite = null
 let myCharactersHouse: Sprite = null
 let characterName = ""
+let myMainCharacter: Sprite = null
 tiles.setTilemap(tilemap`levelAmelieValley`)
 worldSetup()
 questBoyAndLostDog()
