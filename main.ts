@@ -3,10 +3,68 @@ namespace SpriteKind {
     export const Boy = SpriteKind.create()
     export const Dog = SpriteKind.create()
     export const Furniture = SpriteKind.create()
+    export const Car = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tree4`, function (sprite, location) {
     sprite.say("A stumpy stump", 500)
 })
+function dogQuestEvents () {
+    if (myMainCharacter.overlapsWith(characterLostDog)) {
+        characterLostDog.say("Woof woof")
+        characterLostDog.follow(characterBoy)
+    }
+    if (myMainCharacter.overlapsWith(characterBoy)) {
+        game.setDialogCursor(img`
+            . . 4 4 4 . . . . 4 4 4 . . . . 
+            . 4 5 5 5 e . . e 5 5 5 4 . . . 
+            4 5 5 5 5 5 e e 5 5 5 5 5 4 . . 
+            4 5 5 4 4 5 5 5 5 4 4 5 5 4 . . 
+            e 5 4 4 5 5 5 5 5 5 4 4 5 e . . 
+            . e e 5 5 5 5 5 5 5 5 e e . . . 
+            . . e 5 f 5 5 5 5 f 5 e . . . . 
+            . . f 5 5 5 4 4 5 5 5 f . . f f 
+            . . f 4 5 5 f f 5 5 6 f . f 5 f 
+            . . . f 6 6 6 6 6 6 4 4 f 5 5 f 
+            . . . f 4 5 5 5 5 5 5 4 4 5 f . 
+            . . . f 5 5 5 5 5 4 5 5 f f . . 
+            . . . f 5 f f f 5 f f 5 f . . . 
+            . . . f f . . f f . . f f . . . 
+            `)
+        game.setDialogFrame(img`
+            ..bbbbbbbbbbbbbbbbbbbb..
+            .bd111111111111111111db.
+            bd1dbbbbbbbbbbbbbbbbd1db
+            b1dbbbbbbbbbbbbbbbbbbd1b
+            b1bd1111111111111111db1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1bd1111111111111111db1b
+            bd1bbbbbbbbbbbbbbbbbb1db
+            bbd111111111111111111dbb
+            .bbbbbbbbbbbbbbbbbbbbbb.
+            ..bbbbbbbbbbbbbbbbbbbb..
+            `)
+        if (listQuests[0] == "dog found") {
+            characterBoy.vx = -50
+            game.showLongText("Thank you so much!", DialogLayout.Bottom)
+        } else {
+            game.showLongText("Please help me find my dog", DialogLayout.Bottom)
+        }
+        characterBoy.y += 20
+    }
+}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     myMainCharacter,
@@ -71,6 +129,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Building, function (sprite, othe
     scene.centerCameraAt(450, 50)
     tiles.setTilemap(tilemap`levelAmelieHouse0`)
 })
+function exitAmelieHouse () {
+    if (myMainCharacter.y >= 0 && myMainCharacter.y <= 10 && (myMainCharacter.x >= 415 && myMainCharacter.x <= 435)) {
+        tiles.setTilemap(tilemap`levelAmelieValley`)
+        myMainCharacter.setPosition(80, 90)
+        scene.cameraFollowSprite(myMainCharacter)
+    }
+}
 controller.anyButton.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.All, myMainCharacter)
     myMainCharacter.setImage(img`
@@ -274,6 +339,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 function worldSetup () {
+    tiles.setTilemap(tilemap`levelAmelieValley`)
     myCharactersHouse = sprites.create(assets.image`mySplashscreen`, SpriteKind.Building)
     myCharactersHouse.setPosition(80, 25)
     myCharactersField = sprites.create(assets.image`field`, SpriteKind.Player)
@@ -297,7 +363,26 @@ function worldSetup () {
         . . . . . f f . . f f . . . . . 
         `, SpriteKind.Player)
     scene.cameraFollowSprite(myMainCharacter)
-    controller.moveSprite(myMainCharacter)
+    controller.moveSprite(myMainCharacter, 75, 75)
+    myMainCharacterCar = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . 3 3 3 3 3 3 3 3 . . . . 
+        . . . 3 d 3 3 3 3 3 3 c 3 . . . 
+        . . 3 c d 3 3 3 3 3 3 c c 3 . . 
+        . 3 c c d d d d d d 3 c c d 3 d 
+        . 3 c 3 a a a a a a a b c d 3 3 
+        . 3 3 a b b a b b b a a b d 3 3 
+        . 3 a b b b a b b b b a 3 3 3 3 
+        . a a 3 3 3 a 3 3 3 3 3 a 3 3 3 
+        . a a a a a a f a a a f a 3 d d 
+        . a a a a a a f a a f a a a 3 d 
+        . a a a a a a f f f a a a a a a 
+        . a f f f f a a a a f f f a a a 
+        . . f f f f f a a f f f f f a . 
+        . . . f f f . . . . f f f f . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Car)
+    myMainCharacterCar.setPosition(37, 120)
 }
 function questBoyAndLostDog () {
     characterBoy = sprites.create(img`
@@ -385,72 +470,22 @@ sprites.onOverlap(SpriteKind.Boy, SpriteKind.Dog, function (sprite, otherSprite)
     otherSprite.destroy()
     listQuests[0] = "dog found"
 })
-let listQuests: string[] = []
-let characterLostDog: Sprite = null
-let characterBoy: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Car, function (sprite, otherSprite) {
+    scene.cameraFollowSprite(myMainCharacterCar)
+    controller.moveSprite(myMainCharacterCar, 150, 150)
+    myMainCharacter.destroy()
+})
+let myMainCharacterCar: Sprite = null
 let myCharactersField: Sprite = null
 let myCharactersHouse: Sprite = null
 let characterName = ""
+let listQuests: string[] = []
+let characterBoy: Sprite = null
+let characterLostDog: Sprite = null
 let myMainCharacter: Sprite = null
-tiles.setTilemap(tilemap`levelAmelieValley`)
 worldSetup()
 questBoyAndLostDog()
 game.onUpdate(function () {
-    if (myMainCharacter.overlapsWith(characterLostDog)) {
-        characterLostDog.say("Woof woof")
-        characterLostDog.follow(characterBoy)
-    }
-})
-game.onUpdate(function () {
-    if (myMainCharacter.overlapsWith(characterBoy)) {
-        game.setDialogCursor(img`
-            . . 4 4 4 . . . . 4 4 4 . . . . 
-            . 4 5 5 5 e . . e 5 5 5 4 . . . 
-            4 5 5 5 5 5 e e 5 5 5 5 5 4 . . 
-            4 5 5 4 4 5 5 5 5 4 4 5 5 4 . . 
-            e 5 4 4 5 5 5 5 5 5 4 4 5 e . . 
-            . e e 5 5 5 5 5 5 5 5 e e . . . 
-            . . e 5 f 5 5 5 5 f 5 e . . . . 
-            . . f 5 5 5 4 4 5 5 5 f . . f f 
-            . . f 4 5 5 f f 5 5 6 f . f 5 f 
-            . . . f 6 6 6 6 6 6 4 4 f 5 5 f 
-            . . . f 4 5 5 5 5 5 5 4 4 5 f . 
-            . . . f 5 5 5 5 5 4 5 5 f f . . 
-            . . . f 5 f f f 5 f f 5 f . . . 
-            . . . f f . . f f . . f f . . . 
-            `)
-        game.setDialogFrame(img`
-            ..bbbbbbbbbbbbbbbbbbbb..
-            .bd111111111111111111db.
-            bd1dbbbbbbbbbbbbbbbbd1db
-            b1dbbbbbbbbbbbbbbbbbbd1b
-            b1bd1111111111111111db1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1bd1111111111111111db1b
-            bd1bbbbbbbbbbbbbbbbbb1db
-            bbd111111111111111111dbb
-            .bbbbbbbbbbbbbbbbbbbbbb.
-            ..bbbbbbbbbbbbbbbbbbbb..
-            `)
-        if (listQuests[0] == "dog found") {
-            characterBoy.vx = -50
-            game.showLongText("Thank you so much!", DialogLayout.Bottom)
-        } else {
-            game.showLongText("Please help me find my dog", DialogLayout.Bottom)
-        }
-        characterBoy.y += 20
-    }
+    dogQuestEvents()
+    exitAmelieHouse()
 })
