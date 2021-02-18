@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const Building = SpriteKind.create()
     export const Boy = SpriteKind.create()
     export const Dog = SpriteKind.create()
+    export const Furniture = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tree4`, function (sprite, location) {
     sprite.say("A stumpy stump", 500)
@@ -66,7 +67,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Building, function (sprite, otherSprite) {
-    sprite.say("This is my house", 200)
+    sprite.setPosition(430, 50)
+    scene.centerCameraAt(450, 50)
+    tiles.setTilemap(tilemap`levelAmelieHouse0`)
 })
 controller.anyButton.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.All, myMainCharacter)
