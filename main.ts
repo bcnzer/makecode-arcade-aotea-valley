@@ -798,7 +798,6 @@ let myMainCharacter: Sprite = null
 worldSetup()
 questBoyAndLostDog()
 questFindPearl()
-myMainCharacter.setFlag(SpriteFlag.ShowPhysics, true)
 game.onUpdate(function () {
     dogQuestEvents()
     exitAmelieHouse()
