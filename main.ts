@@ -508,6 +508,7 @@ function eventsPearlQuest () {
             ..bbbbbbbbbbbbbbbbbbbb..
             `)
         game.showLongText("Please help me find a pearl", DialogLayout.Bottom)
+        characterPearlGirl.y += 20
     }
 }
 function worldSetup () {
