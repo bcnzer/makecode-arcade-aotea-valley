@@ -151,6 +151,27 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Building, function (sprite, othe
     scene.centerCameraAt(450, 50)
     tiles.setTilemap(tilemap`levelAmelieHouse0`)
 })
+function questFindPearl () {
+    characterPearlGirl = sprites.create(img`
+        . f f f . f f f f . f f f . 
+        f f f f f c c c c f f f f f 
+        f f f f b c c c c b f f f f 
+        f f f c 3 c c c c 3 c f f f 
+        . f 3 3 c c c c c c 3 3 f . 
+        . f c c c c 4 4 c c c c f . 
+        . f f c c 4 4 4 4 c c f f . 
+        . f f f b f 4 4 f b f f f . 
+        . f f 4 1 f d d f 1 4 f f . 
+        . . f f d d d d d d f f . . 
+        . . e f e 4 4 4 4 e f e . . 
+        . e 4 f b 3 3 3 3 b f 4 e . 
+        . 4 d f 3 3 3 3 3 3 c d 4 . 
+        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+        . . . . f f f f f f . . . . 
+        . . . . f f . . f f . . . . 
+        `, SpriteKind.Boy)
+    characterPearlGirl.setPosition(407, 310)
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (usingCar == 1) {
         myMainCharacter = sprites.create(assets.image`characterAmelie`, SpriteKind.Player)
@@ -440,6 +461,55 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
             `)
     }
 })
+function eventsPearlQuest () {
+    if (myMainCharacter.overlapsWith(characterPearlGirl)) {
+        game.setDialogCursor(img`
+            . . . . . f c c c c f . . . . . 
+            . . c c f b b 3 3 b b f c c . . 
+            . c b 3 3 b b c c b b 3 3 b c . 
+            . f 3 c c c b c c b c c c 3 f . 
+            f c b b c c b c c b c c b b c f 
+            c 3 c c b c c c c c c b c c 3 c 
+            c 3 c c c c c c c c c c c c 3 c 
+            . f b b c c c c c c c c b b f . 
+            . . f b b c 8 9 9 8 c b b f . . 
+            . . c c c f 9 3 1 9 f c c c . . 
+            . c 3 f f f 9 3 3 9 f f f 3 c . 
+            c 3 f f f f 8 9 9 8 f f f f 3 c 
+            f 3 c c f f f f f f f f c c 3 f 
+            f b 3 c b b f b b f b b c 3 b f 
+            . c b b 3 3 b 3 3 b 3 3 b b c . 
+            . . f f f f f f f f f f f f . . 
+            `)
+        game.setDialogFrame(img`
+            ..bbbbbbbbbbbbbbbbbbbb..
+            .bd111111111111111111db.
+            bd1dbbbbbbbbbbbbbbbbd1db
+            b1dbbbbbbbbbbbbbbbbbbd1b
+            b1bd1111111111111111db1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1b111111111111111111b1b
+            b1bd1111111111111111db1b
+            bd1bbbbbbbbbbbbbbbbbb1db
+            bbd111111111111111111dbb
+            .bbbbbbbbbbbbbbbbbbbbbb.
+            ..bbbbbbbbbbbbbbbbbbbb..
+            `)
+        game.showLongText("Please help me find a pearl", DialogLayout.Bottom)
+    }
+}
 function worldSetup () {
     tiles.setTilemap(tilemap`levelAmelieValley`)
     myCharactersHouse = sprites.create(assets.image`mySplashscreen`, SpriteKind.Building)
@@ -717,6 +787,7 @@ let spriteTreeStump: Sprite = null
 let myCharactersField: Sprite = null
 let myCharactersHouse: Sprite = null
 let characterName = ""
+let characterPearlGirl: Sprite = null
 let myMainCharacterCar: Sprite = null
 let usingCar = 0
 let listQuests: string[] = []
@@ -725,7 +796,10 @@ let characterLostDog: Sprite = null
 let myMainCharacter: Sprite = null
 worldSetup()
 questBoyAndLostDog()
+questFindPearl()
+myMainCharacter.setFlag(SpriteFlag.ShowPhysics, true)
 game.onUpdate(function () {
     dogQuestEvents()
     exitAmelieHouse()
+    eventsPearlQuest()
 })
