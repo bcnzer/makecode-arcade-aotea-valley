@@ -171,6 +171,25 @@ function questFindPearl () {
         . . . . f f . . f f . . . . 
         `, SpriteKind.Boy)
     characterPearlGirl.setPosition(407, 310)
+    questPearl = sprites.create(img`
+        . . . . . f c c c c f . . . . . 
+        . . c c f b b 3 3 b b f c c . . 
+        . c b 3 3 b b c c b b 3 3 b c . 
+        . f 3 c c c b c c b c c c 3 f . 
+        f c b b c c b c c b c c b b c f 
+        c 3 c c b c c c c c c b c c 3 c 
+        c 3 c c c c c c c c c c c c 3 c 
+        . f b b c c c c c c c c b b f . 
+        . . f b b c 8 9 9 8 c b b f . . 
+        . . c c c f 9 3 1 9 f c c c . . 
+        . c 3 f f f 9 3 3 9 f f f 3 c . 
+        c 3 f f f f 8 9 9 8 f f f f 3 c 
+        f 3 c c f f f f f f f f c c 3 f 
+        f b 3 c b b f b b f b b c 3 b f 
+        . c b b 3 3 b 3 3 b 3 3 b b c . 
+        . . f f f f f f f f f f f f . . 
+        `, SpriteKind.Plant)
+    questPearl.setPosition(60, 400)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (usingCar == 1) {
@@ -462,53 +481,64 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function eventsPearlQuest () {
+    game.setDialogCursor(img`
+        . . . . . f c c c c f . . . . . 
+        . . c c f b b 3 3 b b f c c . . 
+        . c b 3 3 b b c c b b 3 3 b c . 
+        . f 3 c c c b c c b c c c 3 f . 
+        f c b b c c b c c b c c b b c f 
+        c 3 c c b c c c c c c b c c 3 c 
+        c 3 c c c c c c c c c c c c 3 c 
+        . f b b c c c c c c c c b b f . 
+        . . f b b c 8 9 9 8 c b b f . . 
+        . . c c c f 9 3 1 9 f c c c . . 
+        . c 3 f f f 9 3 3 9 f f f 3 c . 
+        c 3 f f f f 8 9 9 8 f f f f 3 c 
+        f 3 c c f f f f f f f f c c 3 f 
+        f b 3 c b b f b b f b b c 3 b f 
+        . c b b 3 3 b 3 3 b 3 3 b b c . 
+        . . f f f f f f f f f f f f . . 
+        `)
+    game.setDialogFrame(img`
+        ..bbbbbbbbbbbbbbbbbbbb..
+        .bd111111111111111111db.
+        bd1dbbbbbbbbbbbbbbbbd1db
+        b1dbbbbbbbbbbbbbbbbbbd1b
+        b1bd1111111111111111db1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1b111111111111111111b1b
+        b1bd1111111111111111db1b
+        bd1bbbbbbbbbbbbbbbbbb1db
+        bbd111111111111111111dbb
+        .bbbbbbbbbbbbbbbbbbbbbb.
+        ..bbbbbbbbbbbbbbbbbbbb..
+        `)
+    if (myMainCharacter.overlapsWith(questPearl)) {
+        listQuests[1] = "found pearl"
+        questPearl.destroy()
+        myMainCharacter.say("I found a pearl!", 500)
+    }
     if (myMainCharacter.overlapsWith(characterPearlGirl)) {
-        game.setDialogCursor(img`
-            . . . . . f c c c c f . . . . . 
-            . . c c f b b 3 3 b b f c c . . 
-            . c b 3 3 b b c c b b 3 3 b c . 
-            . f 3 c c c b c c b c c c 3 f . 
-            f c b b c c b c c b c c b b c f 
-            c 3 c c b c c c c c c b c c 3 c 
-            c 3 c c c c c c c c c c c c 3 c 
-            . f b b c c c c c c c c b b f . 
-            . . f b b c 8 9 9 8 c b b f . . 
-            . . c c c f 9 3 1 9 f c c c . . 
-            . c 3 f f f 9 3 3 9 f f f 3 c . 
-            c 3 f f f f 8 9 9 8 f f f f 3 c 
-            f 3 c c f f f f f f f f c c 3 f 
-            f b 3 c b b f b b f b b c 3 b f 
-            . c b b 3 3 b 3 3 b 3 3 b b c . 
-            . . f f f f f f f f f f f f . . 
-            `)
-        game.setDialogFrame(img`
-            ..bbbbbbbbbbbbbbbbbbbb..
-            .bd111111111111111111db.
-            bd1dbbbbbbbbbbbbbbbbd1db
-            b1dbbbbbbbbbbbbbbbbbbd1b
-            b1bd1111111111111111db1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1b111111111111111111b1b
-            b1bd1111111111111111db1b
-            bd1bbbbbbbbbbbbbbbbbb1db
-            bbd111111111111111111dbb
-            .bbbbbbbbbbbbbbbbbbbbbb.
-            ..bbbbbbbbbbbbbbbbbbbb..
-            `)
-        game.showLongText("Please help me find a pearl", DialogLayout.Bottom)
-        characterPearlGirl.y += 20
+        if (listQuests[1] == "found pearl") {
+            game.showLongText("Thank you so much!", DialogLayout.Bottom)
+            characterPearlGirl.setFlag(SpriteFlag.DestroyOnWall, false)
+            characterPearlGirl.x += 20
+            characterPearlGirl.vx += 20
+        } else {
+            game.showLongText("Please help me find a pearl", DialogLayout.Bottom)
+        }
     }
 }
 function worldSetup () {
@@ -788,6 +818,7 @@ let spriteTreeStump: Sprite = null
 let myCharactersField: Sprite = null
 let myCharactersHouse: Sprite = null
 let characterName = ""
+let questPearl: Sprite = null
 let characterPearlGirl: Sprite = null
 let myMainCharacterCar: Sprite = null
 let usingCar = 0
@@ -798,6 +829,7 @@ let myMainCharacter: Sprite = null
 worldSetup()
 questBoyAndLostDog()
 questFindPearl()
+myMainCharacter.setFlag(SpriteFlag.ShowPhysics, true)
 game.onUpdate(function () {
     dogQuestEvents()
     exitAmelieHouse()
