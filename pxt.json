@@ -1,5 +1,6 @@
 {
-    "name": "Amelie Valley",
+    "name": "Aotea Valley",
+    "version": "0.0.1",
     "description": "",
     "dependencies": {
         "device": "*"
