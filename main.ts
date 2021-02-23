@@ -795,7 +795,64 @@ function worldSetupTrees () {
         . . 8 7 7 7 6 . 
         . . 8 8 8 6 . . 
         `, SpriteKind.Plant)
-    spriteFlower.setPosition(29, 150)
+    spriteFlower.setPosition(307, 286)
+    spriteFlower = sprites.create(img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . c c c . . . 
+        . c c 6 6 c . . 
+        c c 3 3 f 6 c . 
+        c 6 c f 6 3 c . 
+        c 3 6 3 3 3 c . 
+        c 3 6 6 3 3 c . 
+        c 3 3 6 6 3 c . 
+        . c 3 3 3 6 . . 
+        . . 6 7 6 . . . 
+        . . 6 6 8 8 8 6 
+        . . 6 8 7 7 7 6 
+        . . 8 7 7 7 6 . 
+        . . 8 8 8 6 . . 
+        `, SpriteKind.Plant)
+    spriteFlower.setPosition(280, 290)
+    spriteFlower = sprites.create(img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . c c c . . . 
+        . c c 6 6 c . . 
+        c c 3 3 f 6 c . 
+        c 6 c f 6 3 c . 
+        c 3 6 3 3 3 c . 
+        c 3 6 6 3 3 c . 
+        c 3 3 6 6 3 c . 
+        . c 3 3 3 6 . . 
+        . . 6 7 6 . . . 
+        . . 6 6 8 8 8 6 
+        . . 6 8 7 7 7 6 
+        . . 8 7 7 7 6 . 
+        . . 8 8 8 6 . . 
+        `, SpriteKind.Plant)
+    spriteFlower.setPosition(280, 293)
+    spriteFlower = sprites.create(img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . b b d d b b . 
+        b 1 1 3 3 1 1 b 
+        b 1 3 5 5 3 1 b 
+        b d 3 5 5 3 d b 
+        c 1 1 d d 1 1 c 
+        c d 1 d d 1 d c 
+        . c c 7 6 c c . 
+        . . 6 7 6 . . . 
+        . . 6 6 8 8 8 6 
+        . . 6 8 7 7 7 6 
+        . . 8 7 7 7 6 . 
+        . . 8 8 8 6 . . 
+        `, SpriteKind.Plant)
+    spriteFlower.setPosition(295, 281)
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (usingCar == 0) {
